@@ -1,0 +1,45 @@
+{
+	"schemaVersion": 1,
+	"id": "betterthirdperson",
+	"version": "${version}",
+	"name": "Better Third Person",
+	"description": "Improved third-person camera with configurable behavior.",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/betterthirdperson/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"io.socol.betterthirdperson.BetterThirdPerson"
+		],
+		"client": [
+			"io.socol.betterthirdperson.BetterThirdPerson",
+			"io.socol.betterthirdperson.platform.BetterThirdPersonInitializer"
+		],
+		"modmenu": [
+			"io.socol.betterthirdperson.integration.modmenu.ModMenuIntegration"
+		]
+	},
+	"mixins": [
+		{
+			"config": "io/socol/betterthirdperson/mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.18.2",
+		"minecraft": "~1.21.10",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"modmenu": "*",
+		"cloth-config": "*"
+	}
+}

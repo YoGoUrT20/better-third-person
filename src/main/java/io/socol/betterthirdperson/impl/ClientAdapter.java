@@ -1,0 +1,58 @@
+/*
+ * Decompiled with CFR 0.152.
+ * 
+ * Could not load the following classes:
+ *  net.minecraft.class_1657
+ *  net.minecraft.class_310
+ */
+package io.socol.betterthirdperson.impl;
+
+import io.socol.betterthirdperson.api.adapter.IClientAdapter;
+import io.socol.betterthirdperson.api.adapter.IPlayerAdapter;
+import io.socol.betterthirdperson.impl.PlayerAdapter;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.player.LocalPlayer;
+
+public class ClientAdapter
+implements IClientAdapter {
+    public static final ClientAdapter INSTANCE = new ClientAdapter();
+
+    private ClientAdapter() {
+    }
+
+    @Override
+    public boolean isFirstPerson() {
+        return Minecraft.getInstance().options.getCameraType().isFirstPerson();
+    }
+
+    @Override
+    public boolean isCameraOnPlayer() {
+        return Minecraft.getInstance().getCameraEntity() == null || Minecraft.getInstance().getCameraEntity() == Minecraft.getInstance().player;
+    }
+
+    @Override
+    public boolean isCameraMirrored() {
+        return Minecraft.getInstance().options.getCameraType().isMirrored();
+    }
+
+    @Override
+    public IPlayerAdapter getPlayer() {
+        return new PlayerAdapter((LocalPlayer)Minecraft.getInstance().player);
+    }
+
+    @Override
+    public boolean isUsePressed() {
+        return Minecraft.getInstance().options.keyUse.isDown();
+    }
+
+    @Override
+    public boolean isAttackPressed() {
+        return Minecraft.getInstance().options.keyAttack.isDown();
+    }
+
+    @Override
+    public void updateHitResult() {
+        Minecraft.getInstance().gameRenderer.pick(1.0f);
+    }
+}
+
